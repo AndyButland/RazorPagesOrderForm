@@ -1,0 +1,80 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Order Form";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Order Form</h1>
+    <p>Order your free conference merchandise.</p>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Order.FirstName" class="form-label"></label>
+                <input asp-for="Order.FirstName" class="form-control" />
+                <span asp-validation-for="Order.FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Order.LastName" class="form-label"></label>
+                <input asp-for="Order.LastName" class="form-control" />
+                <span asp-validation-for="Order.LastName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Order.Email" class="form-label"></label>
+                <input asp-for="Order.Email" class="form-control" type="email" />
+                <span asp-validation-for="Order.Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Order.Product" class="form-label"></label>
+                <select asp-for="Order.Product" class="form-select" asp-items="@(new SelectList(Pluralsight.OrderForm.Models.Order.AvailableProducts.OrderBy(x => x)))">
+                    <option value="">-- Select a product --</option>
+                </select>
+                <span asp-validation-for="Order.Product" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Order.StreetAddress" class="form-label"></label>
+                <input asp-for="Order.StreetAddress" class="form-control" />
+                <span asp-validation-for="Order.StreetAddress" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Order.City" class="form-label"></label>
+                <input asp-for="Order.City" class="form-control" />
+                <span asp-validation-for="Order.City" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Order.PostalCode" class="form-label"></label>
+                <input asp-for="Order.PostalCode" class="form-control" />
+                <span asp-validation-for="Order.PostalCode" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Order.Comments" class="form-label"></label>
+                <textarea asp-for="Order.Comments" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Order.Comments" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input asp-for="Order.AgreeToTerms" class="form-check-input" />
+                <label asp-for="Order.AgreeToTerms" class="form-check-label"></label>
+                <span asp-validation-for="Order.AgreeToTerms" class="text-danger d-block"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Order</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

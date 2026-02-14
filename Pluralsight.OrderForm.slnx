@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Pluralsight.OrderForm.Tests/Pluralsight.OrderForm.Tests.csproj" />
+  <Project Path="Pluralsight.OrderForm/Pluralsight.OrderForm.csproj" />
+</Solution>
