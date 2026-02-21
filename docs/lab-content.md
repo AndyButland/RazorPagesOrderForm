@@ -176,8 +176,8 @@ The `asp-for` attribute indicates the model property to bind to the element. Pro
 Currently the `Order` model is a standalone class, so you need to add it as a property to the Razor Page. To do this, open `Index.cshtml.cs`. Verify that a `using Pluralsight.OrderForm.Models;` directive is present at the top of the file, then add the following code inside the `IndexModel` class:
 
 ```csharp
-  [BindProperty]
-  public Order Order { get; set; } = new();
+[BindProperty]
+public Order Order { get; set; } = new();
 ```
 
 ---
@@ -326,11 +326,11 @@ Then add field level validation messages to each form field.
 You do this by adding an additional `span` element with an `asp-validation-for` attribute. For example, the full markup for the first name field will be:
 
 ```html
-  <div class="mb-3">
-      <label asp-for="Order.FirstName" class="form-label"></label>
-      <input asp-for="Order.FirstName" class="form-control" />
-      <span asp-validation-for="Order.FirstName" class="text-danger"></span>
-  </div>
+<div class="mb-3">
+    <label asp-for="Order.FirstName" class="form-label"></label>
+    <input asp-for="Order.FirstName" class="form-control" />
+    <span asp-validation-for="Order.FirstName" class="text-danger"></span>
+</div>
 ```
 
 Add this `span` inside the `div` for all fields, adjusting the value of the `asp-validation-for` to match the model property for which you want to display validation errors.
@@ -366,10 +366,10 @@ If one of the products proves particularly popular, the inventory could run out.
 To do this, open the `Index.cshtml.cs` file again and add the following code just before the existing `if (!ModelState.IsValid)` line.
 
 ```csharp
-  if (Order.Product == "Mug")
-  {
-      ModelState.AddModelError("Order.Product", "Sorry, all mugs have been given away.");
-  }
+if (Order.Product == "Mug")
+{
+    ModelState.AddModelError("Order.Product", "Sorry, all mugs have been given away.");
+}
 ```
 
 ---
@@ -493,6 +493,8 @@ Open `IndexTests.cs` and find the `OnPost_ValidModelWithOtherProduct_RedirectsTo
   var redirectResult = Assert.IsType<RedirectToPageResult>(result);
   Assert.Equal("OrderConfirmation", redirectResult.PageName);
 ```
+
+---
 
 That completes the code lab. You have built a functional order form using ASP.NET Razor Pages.
 
