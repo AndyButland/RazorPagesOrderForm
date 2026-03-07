@@ -35,9 +35,9 @@ Click on the **Web Browser** tab and then on the **Open in new browser tab** but
 
 Explore the files in the `Pluralsight.OrderForm` folder to see what makes up a Razor Pages application.
 
-- In `Models` you will find `Order.cs`. This is a C# model that will represent the order form. It currently contains a single property. You will add properties to this class to capture and validate the information needed to fulfill the order.
-- In `Pages` there is a file `Index.cshtml`. This is the Razor template used to present the order form. It contains placeholder markup with TODO comments for each form field you will implement. The wrapping HTML structure is already in place — you will replace the TODO comments with the appropriate tag helpers.
-- Co-located with this file is `Index.cshtml.cs`. This is the associated code file for the page.  You'll see two empty methods: `OnGet()` and `OnPost()`. These run when the page receives a GET request and a POST request, respectively. These methods allow you to customize the behavior of the page when it loads and when a form is submitted.
+* In the `Models` folder, you will find `Order.cs`. This is a C# model that represents the order form. It currently contains a single property. You will add additional properties to this class to capture and validate the information required to fulfill an order.
+* In the `Pages` folder, locate `Index.cshtml`. This Razor template renders the order form. It contains placeholder markup with TODO comments for each form field you will implement.
+* In the `Pages` folder, you will also find `Index.cshtml.cs`. This file contains the associated code for the page. It includes two empty methods: `OnGet()` and `OnPost()`. These methods run when the page receives a GET request and a POST request, respectively. You will use them to customize the behavior of the page when it loads and when a form is submitted.
 
 There are other files necessary for bootstrapping the web application and rendering the pages that you can review. None are essential to understand for the purposes of the lab nor will you be modifying them.
 
@@ -486,10 +486,10 @@ Open `Index.cshtml`.
 Replace the TODO comment inside the product selection `<div>` with the following markup:
 
 ```html
-      <label asp-for="Order.Product" class="form-label"></label>
-      <select asp-for="Order.Product" class="form-select" asp-items="@(new SelectList(Pluralsight.OrderForm.Models.Order.AvailableProducts.OrderBy(x => x)))">
-          <option value="">-- Select a product --</option>
-      </select>
+  <label asp-for="Order.Product" class="form-label"></label>
+  <select asp-for="Order.Product" class="form-select" asp-items="@(new SelectList(Pluralsight.OrderForm.Models.Order.AvailableProducts.OrderBy(x => x)))">
+      <option value="">-- Select a product --</option>
+  </select>
 ```
 
 ---
@@ -518,19 +518,9 @@ There are two more fields you need to add to the form: the free text comments an
 
 Open `Index.cshtml`.
 
-Replace the TODO comment inside the comments `<div>` with:
+Following the same pattern you used in the previous task, replace the TODO comment inside the comments `<div>` with a `label` and input element bound to `Order.Comments`. For this field, use a `<textarea>` element instead of `<input>`, with `class="form-control"` and a `rows="3"` attribute.
 
-```html
-      <label asp-for="Order.Comments" class="form-label"></label>
-      <textarea asp-for="Order.Comments" class="form-control" rows="3"></textarea>
-```
-
-Then replace the TODO comment inside the agree to terms `<div>` with:
-
-```html
-      <input asp-for="Order.AgreeToTerms" class="form-check-input" />
-      <label asp-for="Order.AgreeToTerms" class="form-check-label"></label>
-```
+Then replace the TODO comment inside the agree to terms `<div>`. This field uses a checkbox, so add an `<input>` bound to `Order.AgreeToTerms` with `class="form-check-input"`, followed by a `<label>` bound to the same property with `class="form-check-label"`.
 
 ---
 Check:
@@ -572,18 +562,7 @@ Open the `Index.cshtml.cs` file.
 
 First, change the return type of the `OnPost()` method from `void` to `IActionResult`. This interface allows the method to return different types of responses, such as re-rendering the page or redirecting to another URL.
 
-Then add the following code inside the method body.
-
-```csharp
-  if (!ModelState.IsValid)
-  {
-      return Page();
-  }
-
-  // Process the order here (e.g. save to database).
-
-  return Redirect("/");
-```
+Then add logic inside the method body. Check if `ModelState.IsValid` is false. If it is, return `Page()` to re-render the form so the user can correct their input. If validation passes, return `Redirect("/")` as a temporary placeholder for the success path.
 
 ---
 Check:
@@ -710,7 +689,7 @@ The default ASP.NET Razor Pages project includes a **partial view** - a reusable
 Open `Index.cshtml`. At the bottom of the file, you will see a `@section Scripts` block with a TODO comment. Replace the TODO comment with the following partial view reference:
 
 ```html
-    <partial name="_ValidationScriptsPartial" />
+  <partial name="_ValidationScriptsPartial" />
 ```
 
 The `@section` directive injects content into a named placeholder defined in the layout page. This partial view includes the jQuery unobtrusive validation scripts.
@@ -743,14 +722,11 @@ If one of the products proves particularly popular, the inventory could run out.
 
 ### Task 4.4: Implement a custom server-side validation rule
 
-To do this, open the `Index.cshtml.cs` file again and add the following code just before the existing `if (!ModelState.IsValid)` line.
+Open the `Index.cshtml.cs` file again.
 
-```csharp
-if (Order.Product == "Mug")
-{
-    ModelState.AddModelError("Order.Product", "Sorry, all mugs have been given away.");
-}
-```
+Just before the existing `if (!ModelState.IsValid)` check, add code that tests whether `Order.Product` equals `"Mug"`. If it does, use `ModelState.AddModelError()` to add an error against the key `"Order.Product"` with the message `"Sorry, all mugs have been given away."`
+
+It's important that this code runs before the `ModelState.IsValid` check. The added error will then cause that check to fail and the form will be re-displayed with the error message.
 
 ---
 Check:
@@ -784,23 +760,7 @@ The final requirement is to display a confirmation page when the user submits a 
 
 Create two new files in the `Pages` folder named `OrderConfirmation.cshtml` and `OrderConfirmation.cshtml.cs`.
 
-Add the following markup and Razor code to `OrderConfirmation.cshtml`:
-
-```html
-@page
-@model OrderConfirmationModel
-@{
-    ViewData["Title"] = "Order Confirmation";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Thank You!</h1>
-    <p class="lead">Your order has been submitted successfully.</p>
-    <a asp-page="Index" class="btn btn-primary mt-3">Place Another Order</a>
-</div>
-```
-
-And populate `OrderConfirmation.cshtml.cs` with:
+Populate `OrderConfirmation.cshtml.cs` with the following code to define the page model:
 
 ```csharp
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -814,6 +774,13 @@ public class OrderConfirmationModel : PageModel
     }
 }
 ```
+
+Now build the Razor template in `OrderConfirmation.cshtml` yourself, using what you have learned from working with `Index.cshtml`. The page should:
+
+- Start with the `@page` directive and set the model to `OrderConfirmationModel`
+- Set `ViewData["Title"]` to `"Order Confirmation"`
+- Display a thank-you heading and a message confirming the order was submitted
+- Include a link back to the `Index` page using the `asp-page` tag helper, so the user can place another order
 
 ---
 Checks:
