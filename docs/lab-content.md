@@ -61,6 +61,8 @@ All information is required other than the comments.
 
 ### Task 2.1: Add properties to represent the form data
 
+Open `Order.cs`.
+
 Augment the `Order` class with the properties necessary to capture this information.
 
 You should use the following property names and types:
@@ -121,6 +123,8 @@ The model needs to define not just the information you collect from the form. Yo
 In this scenario, the products available are a fixed set so you can add them directly to the model.
 
 ### Task 2.2: Add a static list of available products
+
+Open `Order.cs`.
 
 Add a new `static` property to the model called `AvailableProducts` which should be of type `List<string>`.
 
@@ -208,7 +212,9 @@ public string FirstName { get; set; } = string.Empty;
 
 ### Task 2.3: Add data annotation attributes for validation
 
-Add data validation attributes to all properties to ensure that they are constrained for valid input. You should add the following:
+In `Order.cs`, add data validation attributes to all properties to ensure that they are constrained for valid input.
+
+Apply the following attributes:
 
 - `[Required]` to all properties other than `Comments` (which is optional) and `AvailableProducts` which is read-only as it's provided rather than collected information
 - `[StringLength(*)]` to all properties that are defined as strings. Replace the `*` with the following maximum lengths, appropriate for each field:
@@ -314,7 +320,7 @@ public string FirstName { get; set; } = string.Empty;
 
 ### Task 2.4: Add data annotation attributes for friendlier display
 
-Apply `[Display(Name = "...")]` data annotations to all properties, with the following friendly field names:
+In `Order.cs`, apply `[Display(Name = "...")]` data annotations to all properties, with the following friendly field names:
 
 - `FirstName` - "First Name"
 - `LastName` - "Last Name"
@@ -475,7 +481,9 @@ The product selection should be presented as a drop-down list rather than a text
 
 ### Task 3.3: Add a drop-down list for product selection
 
-Add the following markup to the form to render the product selection:
+Open `Index.cshtml`.
+
+Inside the `<form>` element, add the following markup to render the product selection field:
 
 ```html
   <div class="mb-3">
@@ -510,7 +518,9 @@ There are two more fields you need to add to the form: the free text comments an
 
 ### Task 3.4: Add textarea and checkbox fields
 
-Add this markup for the two remaining fields, just above the **Submit Order** button.
+Open `Index.cshtml`.
+
+Just above the **Submit Order** button, add this markup for the comments and agreement fields:
 
 ```html
   <div class="mb-3">
@@ -613,7 +623,7 @@ ASP.NET provides two tag helpers for presenting validation errors, one for prese
 
 ### Task 4.2: Add validation summary and field-level validation messages
 
-First add the overall summary by adding the following tag helper right at the top of the form, above the fields and just inside the `<form>` element:
+Open `Index.cshtml`. First add the overall summary by adding the following tag helper right at the top of the form, above the fields and just inside the `<form>` element:
 
 ```html
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
