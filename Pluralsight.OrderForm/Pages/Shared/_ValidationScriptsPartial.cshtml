@@ -1,2 +1,12 @@
 ﻿<script src="~/lib/jquery-validation/jquery.validate.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    // Fix: jQuery Validate's range rule doesn't handle boolean checkboxes.
+    // Override the adapter to use a custom method for bool range validation.
+    $.validator.methods.range = function (value, element, param) {
+        if (element.type === 'checkbox') {
+            return element.checked;
+        }
+        return this.optional(element) || (value >= Number(param[0]) && value <= Number(param[1]));
+    };
+</script>

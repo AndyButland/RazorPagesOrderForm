@@ -26,18 +26,8 @@ public class Order
 
     [Required]
     [StringLength(200)]
-    [Display(Name = "Street Address")]
-    public string StreetAddress { get; set; } = string.Empty;
-
-    [Required]
-    [StringLength(100)]
-    [Display(Name = "City")]
-    public string City { get; set; } = string.Empty;
-
-    [Required]
-    [StringLength(20)]
-    [Display(Name = "Post/Zip Code")]
-    public string PostalCode { get; set; } = string.Empty;
+    [Display(Name = "Address")]
+    public string Address { get; set; } = string.Empty;
 
     [StringLength(500)]
     [Display(Name = "Comments")]

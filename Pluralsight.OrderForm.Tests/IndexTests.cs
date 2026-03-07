@@ -33,9 +33,7 @@ public class IndexTests
             LastName = "Doe",
             Email = "john@example.com",
             Product = "Mug",
-            StreetAddress = "123 Main St",
-            City = "London",
-            PostalCode = "SW1A 1AA",
+            Address = "123 Main St, London, SW1A 1AA",
             AgreeToTerms = true
         };
 
@@ -59,9 +57,7 @@ public class IndexTests
             LastName = "Doe",
             Email = "john@example.com",
             Product = "T-Shirt",
-            StreetAddress = "123 Main St",
-            City = "London",
-            PostalCode = "SW1A 1AA",
+            Address = "123 Main St, London, SW1A 1AA",
             AgreeToTerms = true
         };
 
