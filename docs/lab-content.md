@@ -79,37 +79,37 @@ Check:
 rules:
 - id: task_2_1_lastname
   pattern-regex: public\s+string\s+LastName\s*\{\s*get\s*;\s*set\s*;\s*\}\s*=\s*(string\.Empty|"");
-  message: Add a public property named 'LastName' with a string type, initialized to an empty string.
+  message: Add a public property named `LastName` with a `string` type, initialized to an empty string.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_1_email
   pattern-regex: public\s+string\s+Email\s*\{\s*get\s*;\s*set\s*;\s*\}\s*=\s*(string\.Empty|"");
-  message: Add a public property named 'Email' with a string type, initialized to an empty string.
+  message: Add a public property named `Email` with a `string` type, initialized to an empty string.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_1_product
   pattern-regex: public\s+string\s+Product\s*\{\s*get\s*;\s*set\s*;\s*\}\s*=\s*(string\.Empty|"");
-  message: Add a public property named 'Product' with a string type, initialized to an empty string.
+  message: Add a public property named `Product` with a `string` type, initialized to an empty string.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_1_address
   pattern-regex: public\s+string\s+Address\s*\{\s*get\s*;\s*set\s*;\s*\}\s*=\s*(string\.Empty|"");
-  message: Add a public property named 'Address' with a string type, initialized to an empty string.
+  message: Add a public property named `Address` with a `string` type, initialized to an empty string.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_1_comments
   pattern-regex: public\s+string\?\s+Comments\s*\{\s*get\s*;\s*set\s*;\s*\}
-  message: Add a public property named 'Comments' with a nullable string type.
+  message: Add a public property named `Comments` with a `string?` type.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_1_agreeterms
   pattern-regex: public\s+bool\s+AgreeToTerms\s*\{\s*get\s*;\s*set\s*;\s*\}
-  message: Add a public property named 'AgreeToTerms' with a bool type.
+  message: Add a public property named `AgreeToTerms` with a `bool` type.
   languages: [C#]
   severity: WARNING
 ```
@@ -141,49 +141,49 @@ Check:
 rules:
 - id: task_2_2_property
   pattern-regex: public\s+static\s+List<string>\s+AvailableProducts
-  message: Add a public static property named 'AvailableProducts' with a type of list of string.
+  message: Add a public static property named `AvailableProducts` with a type of `List<string>`.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_2_tshirt
   pattern-regex: '"T-Shirt"'
-  message: Add 'T-Shirt' to the AvailableProducts list.
+  message: Add `"T-Shirt"` to the `AvailableProducts` list.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_2_mug
   pattern-regex: '"Mug"'
-  message: Add 'Mug' to the AvailableProducts list.
+  message: Add `"Mug"` to the `AvailableProducts` list.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_2_baseballcap
   pattern-regex: '"Baseball Cap"'
-  message: Add 'Baseball Cap' to the AvailableProducts list.
+  message: Add `"Baseball Cap"` to the `AvailableProducts` list.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_2_hoodie
   pattern-regex: '"Hoodie"'
-  message: Add 'Hoodie' to the AvailableProducts list.
+  message: Add `"Hoodie"` to the `AvailableProducts` list.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_2_laptopstickers
   pattern-regex: '"Laptop Stickers"'
-  message: Add 'Laptop Stickers' to the AvailableProducts list.
+  message: Add `"Laptop Stickers"` to the `AvailableProducts` list.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_2_waterbottle
   pattern-regex: '"Water Bottle"'
-  message: Add 'Water Bottle' to the AvailableProducts list.
+  message: Add `"Water Bottle"` to the `AvailableProducts` list.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_2_totebag
   pattern-regex: '"Tote Bag"'
-  message: Add 'Tote Bag' to the AvailableProducts list.
+  message: Add `"Tote Bag"` to the `AvailableProducts` list.
   languages: [C#]
   severity: WARNING
 ```
@@ -226,73 +226,73 @@ Check:
 rules:
 - id: task_2_3_required_firstname
   pattern-regex: \[Required\]\s*(\[[^\]]*\]\s*)*public\s+string\s+FirstName
-  message: Add a 'Required' attribute to the FirstName property.
+  message: Add a `[Required]` attribute to the `FirstName` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_3_required_lastname
   pattern-regex: \[Required\]\s*(\[[^\]]*\]\s*)*public\s+string\s+LastName
-  message: Add a 'Required' attribute to the LastName property.
+  message: Add a `[Required]` attribute to the `LastName` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_3_required_email
   pattern-regex: \[Required\]\s*(\[[^\]]*\]\s*)*public\s+string\s+Email
-  message: Add a 'Required' attribute to the Email property.
+  message: Add a `[Required]` attribute to the `Email` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_3_required_product
   pattern-regex: \[Required\]\s*(\[[^\]]*\]\s*)*public\s+string\s+Product
-  message: Add a 'Required' attribute to the Product property.
+  message: Add a `[Required]` attribute to the `Product` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_3_required_address
   pattern-regex: \[Required\]\s*(\[[^\]]*\]\s*)*public\s+string\s+Address
-  message: Add a 'Required' attribute to the Address property.
+  message: Add a `[Required]` attribute to the `Address` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_3_stringlength_firstname
   pattern-regex: \[StringLength\(50\)\]\s*(\[[^\]]*\]\s*)*public\s+string\s+FirstName
-  message: Add a 'StringLength' attribute with a parameter of 50 to the FirstName property.
+  message: Add a `[StringLength(50)]` attribute to the `FirstName` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_3_stringlength_lastname
   pattern-regex: \[StringLength\(50\)\]\s*(\[[^\]]*\]\s*)*public\s+string\s+LastName
-  message: Add a 'StringLength' attribute with a parameter of 50 to the LastName property.
+  message: Add a `[StringLength(50)]` attribute to the `LastName` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_3_stringlength_email
   pattern-regex: \[StringLength\(100\)\]\s*(\[[^\]]*\]\s*)*public\s+string\s+Email
-  message: Add a 'StringLength' attribute with a parameter of 100 to the Email property.
+  message: Add a `[StringLength(100)]` attribute to the `Email` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_3_stringlength_address
   pattern-regex: \[StringLength\(200\)\]\s*(\[[^\]]*\]\s*)*public\s+string\s+Address
-  message: Add a 'StringLength' attribute with a parameter of 200 to the Address property.
+  message: Add a `[StringLength(200)]` attribute to the `Address` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_3_stringlength_comments
   pattern-regex: \[StringLength\(500\)\]\s*(\[[^\]]*\]\s*)*public\s+string\?\s+Comments
-  message: Add a 'StringLength' attribute with a parameter of 500 to the Comments property.
+  message: Add a `[StringLength(500)]` attribute to the `Comments` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_3_emailaddress
   pattern-regex: \[EmailAddress\]\s*(\[[^\]]*\]\s*)*public\s+string\s+Email
-  message: Add an 'EmailAddress' attribute to the Email property.
+  message: Add an `[EmailAddress]` attribute to the `Email` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_3_range_agreeterms
   pattern-regex: \[Range\(typeof\(bool\),\s*"true",\s*"true",\s*ErrorMessage\s*=\s*"You must agree to the data collection policy\."\)\]
-  message: Add a 'Range' attribute to the AgreeToTerms property that constrains it to true, with the specified error message.
+  message: Add a `[Range]` attribute to the `AgreeToTerms` property that constrains it to true, with the specified error message.
   languages: [C#]
   severity: WARNING
 ```
@@ -331,43 +331,43 @@ Check:
 rules:
 - id: task_2_4_display_firstname
   pattern-regex: \[Display\(Name\s*=\s*"First Name"\)\]\s*(\[[^\]]*\]\s*)*public\s+string\s+FirstName
-  message: Add a 'Display' attribute with the name 'First Name' to the FirstName property.
+  message: Add a `[Display(Name = "First Name")]` attribute to the `FirstName` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_4_display_lastname
   pattern-regex: \[Display\(Name\s*=\s*"Last Name"\)\]\s*(\[[^\]]*\]\s*)*public\s+string\s+LastName
-  message: Add a 'Display' attribute with the name 'Last Name' to the LastName property.
+  message: Add a `[Display(Name = "Last Name")]` attribute to the `LastName` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_4_display_email
   pattern-regex: \[Display\(Name\s*=\s*"Email Address"\)\]\s*(\[[^\]]*\]\s*)*public\s+string\s+Email
-  message: Add a 'Display' attribute with the name 'Email Address' to the Email property.
+  message: Add a `[Display(Name = "Email Address")]` attribute to the `Email` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_4_display_product
   pattern-regex: \[Display\(Name\s*=\s*"Product"\)\]\s*(\[[^\]]*\]\s*)*public\s+string\s+Product
-  message: Add a 'Display' attribute with the name 'Product' to the Product property.
+  message: Add a `[Display(Name = "Product")]` attribute to the `Product` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_4_display_address
   pattern-regex: \[Display\(Name\s*=\s*"Address"\)\]\s*(\[[^\]]*\]\s*)*public\s+string\s+Address
-  message: Add a 'Display' attribute with the name 'Address' to the Address property.
+  message: Add a `[Display(Name = "Address")]` attribute to the `Address` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_4_display_comments
   pattern-regex: \[Display\(Name\s*=\s*"Comments"\)\]\s*(\[[^\]]*\]\s*)*public\s+string\?\s+Comments
-  message: Add a 'Display' attribute with the name 'Comments' to the Comments property.
+  message: Add a `[Display(Name = "Comments")]` attribute to the `Comments` property.
   languages: [C#]
   severity: WARNING
 
 - id: task_2_4_display_agreeterms
   pattern-regex: \[Display\(Name\s*=\s*"I agree to my data being collected to fulfill this request"\)\]\s*(\[[^\]]*\]\s*)*public\s+bool\s+AgreeToTerms
-  message: Add a 'Display' attribute with the name 'I agree to my data being collected to fulfill this request' to the AgreeToTerms property.
+  message: Add a `[Display]` attribute with the name "I agree to my data being collected to fulfill this request" to the `AgreeToTerms` property.
   languages: [C#]
   severity: WARNING
 ```
@@ -409,7 +409,7 @@ Check:
 rules:
 - id: task_3_1_bindproperty
   pattern-regex: \[BindProperty\]\s*public\s+Order\s+Order\s*\{\s*get\s*;\s*set\s*;\s*\}\s*=\s*new\(\);
-  message: Add a 'BindProperty' attribute and a public Order property initialized to a new instance in IndexModel.
+  message: Add a `[BindProperty]` attribute and a public `Order` property initialized to a new instance in `IndexModel`.
   languages: [C#]
   severity: WARNING
 ```
@@ -440,31 +440,31 @@ Check:
 rules:
 - id: task_3_2_input_firstname
   pattern-regex: <input\s[^>]*asp-for\s*=\s*"Order\.FirstName"
-  message: Add an input element bound to 'Order.FirstName' using the asp-for tag helper.
+  message: Add an `<input>` element bound to `Order.FirstName` using the `asp-for` tag helper.
   languages: [generic]
   severity: WARNING
 
 - id: task_3_2_input_lastname
   pattern-regex: <input\s[^>]*asp-for\s*=\s*"Order\.LastName"
-  message: Add an input element bound to 'Order.LastName' using the asp-for tag helper.
+  message: Add an `<input>` element bound to `Order.LastName` using the `asp-for` tag helper.
   languages: [generic]
   severity: WARNING
 
 - id: task_3_2_input_email
   pattern-regex: <input\s[^>]*asp-for\s*=\s*"Order\.Email"
-  message: Add an input element bound to 'Order.Email' using the asp-for tag helper.
+  message: Add an `<input>` element bound to `Order.Email` using the `asp-for` tag helper.
   languages: [generic]
   severity: WARNING
 
 - id: task_3_2_email_type
   pattern-regex: <input\s[^>]*asp-for\s*=\s*"Order\.Email"[^>]*type\s*=\s*"email"
-  message: Set the type attribute to 'email' on the Email input element.
+  message: Set the `type` attribute to `"email"` on the `Email` input element.
   languages: [generic]
   severity: WARNING
 
 - id: task_3_2_input_address
   pattern-regex: <input\s[^>]*asp-for\s*=\s*"Order\.Address"
-  message: Add an input element bound to 'Order.Address' using the asp-for tag helper.
+  message: Add an `<input>` element bound to `Order.Address` using the `asp-for` tag helper.
   languages: [generic]
   severity: WARNING
 ```
@@ -493,13 +493,13 @@ Check:
 rules:
 - id: task_3_3_select_product
   pattern-regex: <select\s[^>]*asp-for\s*=\s*"Order\.Product"
-  message: Add a select element bound to 'Order.Product' using the asp-for tag helper.
+  message: Add a `<select>` element bound to `Order.Product` using the `asp-for` tag helper.
   languages: [generic]
   severity: WARNING
 
 - id: task_3_3_asp_items
   pattern-regex: asp-items\s*=\s*"@\(new SelectList\(Pluralsight\.OrderForm\.Models\.Order\.AvailableProducts
-  message: Populate the product select element with a SelectList of the AvailableProducts using the asp-items tag helper.
+  message: Populate the product `<select>` element with a `SelectList` of `AvailableProducts` using the `asp-items` tag helper.
   languages: [generic]
   severity: WARNING
 ```
@@ -531,13 +531,13 @@ Check:
 rules:
 - id: task_3_4_textarea_comments
   pattern-regex: <textarea\s[^>]*asp-for\s*=\s*"Order\.Comments"
-  message: Add a textarea element bound to 'Order.Comments' using the asp-for tag helper.
+  message: Add a `<textarea>` element bound to `Order.Comments` using the `asp-for` tag helper.
   languages: [generic]
   severity: WARNING
 
 - id: task_3_4_input_agreeterms
   pattern-regex: <input\s[^>]*asp-for\s*=\s*"Order\.AgreeToTerms"
-  message: Add an input element bound to 'Order.AgreeToTerms' using the asp-for tag helper.
+  message: Add an `<input>` element bound to `Order.AgreeToTerms` using the `asp-for` tag helper.
   languages: [generic]
   severity: WARNING
 ```
@@ -584,19 +584,19 @@ Check:
 rules:
 - id: task_4_1_return_type
   pattern-regex: public\s+IActionResult\s+OnPost\s*\(
-  message: Change the return type of the OnPost method to 'IActionResult'.
+  message: Change the return type of the `OnPost` method to `IActionResult`.
   languages: [C#]
   severity: WARNING
 
 - id: task_4_1_modelstate_check
   pattern-regex: if\s*\(\s*!ModelState\.IsValid\s*\)
-  message: Add a check for 'ModelState.IsValid' inside the OnPost method.
+  message: Add a check for `ModelState.IsValid` inside the `OnPost` method.
   languages: [C#]
   severity: WARNING
 
 - id: task_4_1_return_page
   pattern-regex: return\s+Page\(\)
-  message: Return 'Page()' when model state validation fails to re-render the form.
+  message: Return `Page()` when model state validation fails to re-render the form.
   languages: [C#]
   severity: WARNING
 ```
@@ -642,49 +642,49 @@ Check:
 rules:
 - id: task_4_2_validation_summary
   pattern-regex: asp-validation-summary\s*=\s*"ModelOnly"
-  message: Add a validation summary element set to 'ModelOnly' at the top of the form.
+  message: Add a validation summary element set to `ModelOnly` at the top of the form.
   languages: [generic]
   severity: WARNING
 
 - id: task_4_2_validation_firstname
   pattern-regex: asp-validation-for\s*=\s*"Order\.FirstName"
-  message: Add a validation message element for the FirstName field using the asp-validation-for tag helper.
+  message: Add a validation message element for the `FirstName` field using the `asp-validation-for` tag helper.
   languages: [generic]
   severity: WARNING
 
 - id: task_4_2_validation_lastname
   pattern-regex: asp-validation-for\s*=\s*"Order\.LastName"
-  message: Add a validation message element for the LastName field using the asp-validation-for tag helper.
+  message: Add a validation message element for the `LastName` field using the `asp-validation-for` tag helper.
   languages: [generic]
   severity: WARNING
 
 - id: task_4_2_validation_email
   pattern-regex: asp-validation-for\s*=\s*"Order\.Email"
-  message: Add a validation message element for the Email field using the asp-validation-for tag helper.
+  message: Add a validation message element for the `Email` field using the `asp-validation-for` tag helper.
   languages: [generic]
   severity: WARNING
 
 - id: task_4_2_validation_product
   pattern-regex: asp-validation-for\s*=\s*"Order\.Product"
-  message: Add a validation message element for the Product field using the asp-validation-for tag helper.
+  message: Add a validation message element for the `Product` field using the `asp-validation-for` tag helper.
   languages: [generic]
   severity: WARNING
 
 - id: task_4_2_validation_address
   pattern-regex: asp-validation-for\s*=\s*"Order\.Address"
-  message: Add a validation message element for the Address field using the asp-validation-for tag helper.
+  message: Add a validation message element for the `Address` field using the `asp-validation-for` tag helper.
   languages: [generic]
   severity: WARNING
 
 - id: task_4_2_validation_comments
   pattern-regex: asp-validation-for\s*=\s*"Order\.Comments"
-  message: Add a validation message element for the Comments field using the asp-validation-for tag helper.
+  message: Add a validation message element for the `Comments` field using the `asp-validation-for` tag helper.
   languages: [generic]
   severity: WARNING
 
 - id: task_4_2_validation_agreeterms
   pattern-regex: asp-validation-for\s*=\s*"Order\.AgreeToTerms"
-  message: Add a validation message element for the AgreeToTerms field using the asp-validation-for tag helper.
+  message: Add a validation message element for the `AgreeToTerms` field using the `asp-validation-for` tag helper.
   languages: [generic]
   severity: WARNING
 ```
@@ -716,13 +716,13 @@ Check:
 rules:
 - id: task_4_3_section_scripts
   pattern-regex: \@section\s+Scripts
-  message: Add a 'Scripts' section block to the bottom of Index.cshtml.
+  message: Add a `Scripts` section block to the bottom of `Index.cshtml`.
   languages: [generic]
   severity: WARNING
 
 - id: task_4_3_validation_partial
   pattern-regex: <partial\s+name\s*=\s*"_ValidationScriptsPartial"
-  message: Include the validation scripts partial view inside the Scripts section.
+  message: Include the `_ValidationScriptsPartial` partial view inside the `Scripts` section.
   languages: [generic]
   severity: WARNING
 ```
@@ -753,13 +753,13 @@ Check:
 rules:
 - id: task_4_4_mug_check
   pattern-regex: Order\.Product\s*==\s*"Mug"
-  message: Add a check that compares the selected product to 'Mug' in the OnPost method.
+  message: Add a check that compares the selected product to `"Mug"` in the `OnPost` method.
   languages: [C#]
   severity: WARNING
 
 - id: task_4_4_mug_error
   pattern-regex: AddModelError\(\s*"Order\.Product"\s*,\s*"Sorry, all mugs have been given away\."
-  message: Add a model error for the Product field with the message 'Sorry, all mugs have been given away.' when Mug is selected.
+  message: Add a model error for the `Product` field with the message "Sorry, all mugs have been given away." when Mug is selected.
   languages: [C#]
   severity: WARNING
 ```
@@ -816,13 +816,13 @@ Checks:
 rules:
 - id: task_5_1_cshtml_page_directive
   pattern-regex: \@page
-  message: Add the page directive to the top of OrderConfirmation.cshtml.
+  message: Add the `@page` directive to the top of `OrderConfirmation.cshtml`.
   languages: [generic]
   severity: WARNING
 
 - id: task_5_1_cshtml_model
   pattern-regex: \@model\s+OrderConfirmationModel
-  message: Set the model to 'OrderConfirmationModel' in OrderConfirmation.cshtml.
+  message: Set the model to `OrderConfirmationModel` in `OrderConfirmation.cshtml`.
   languages: [generic]
   severity: WARNING
 ```
@@ -831,7 +831,7 @@ rules:
 rules:
 - id: task_5_1_cs_class
   pattern-regex: public\s+class\s+OrderConfirmationModel\s*:\s*PageModel
-  message: Create an 'OrderConfirmationModel' class that inherits from 'PageModel'.
+  message: Create an `OrderConfirmationModel` class that inherits from `PageModel`.
   languages: [C#]
   severity: WARNING
 ```
@@ -857,7 +857,7 @@ Check:
 rules:
 - id: task_5_2_redirect
   pattern-regex: return\s+RedirectToPage\(\s*"OrderConfirmation"\s*\)
-  message: Return a redirect to the 'OrderConfirmation' page at the end of the OnPost method.
+  message: Return a redirect to the `OrderConfirmation` page at the end of the `OnPost` method.
   languages: [C#]
   severity: WARNING
 ```
