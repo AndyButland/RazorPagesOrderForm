@@ -36,7 +36,7 @@ Click on the **Web Browser** tab and then on the **Open in new browser tab** but
 Explore the files in the `Pluralsight.OrderForm` folder to see what makes up a Razor Pages application.
 
 - In `Models` you will find `Order.cs`. This is a C# model that will represent the order form. It currently contains a single property. You will add properties to this class to capture and validate the information needed to fulfill the order.
-- In `Pages` there is a file `Index.cshtml`. This is the Razor template used to present the order form.  Currently it contains just some boilerplate HTML, which you will be extending to present the form fields.
+- In `Pages` there is a file `Index.cshtml`. This is the Razor template used to present the order form. It contains placeholder markup with TODO comments for each form field you will implement. The wrapping HTML structure is already in place — you will replace the TODO comments with the appropriate tag helpers.
 - Co-located with this file is `Index.cshtml.cs`. This is the associated code file for the page.  You'll see two empty methods: `OnGet()` and `OnPost()`. These run when the page receives a GET request and a POST request, respectively. These methods allow you to customize the behavior of the page when it loads and when a form is submitted.
 
 There are other files necessary for bootstrapping the web application and rendering the pages that you can review. None are essential to understand for the purposes of the lab nor will you be modifying them.
@@ -124,9 +124,7 @@ In this scenario, the products available are a fixed set so you can add them dir
 
 ### Task 2.2: Add a static list of available products
 
-Open `Order.cs`.
-
-Add a new `static` property to the model called `AvailableProducts` which should be of type `List<string>`.
+In `Order.cs`, add a new `static` property to the model called `AvailableProducts` which should be of type `List<string>`.
 
 This should return a hard-coded collection of the following product names:
 
@@ -426,7 +424,9 @@ The `[BindProperty]` attribute enables **model binding**. ASP.NET will automatic
 
 ### Task 3.2: Add text and email input fields using tag helpers
 
-Now add tag helpers for all the text and email input fields to the `Index.cshtml` file, inside the `<form>` element. Each one should use markup similar to the following, which binds the model's `FirstName` property to an `input` control.
+Open `Index.cshtml`. Inside the `<form>` element, you will see placeholder `<div>` elements with TODO comments for each form field. Replace the TODO comment in each text field's `<div>` with a `label` and `input` element bound to the appropriate model property using tag helpers.
+
+For example, the first name field should look like this when complete:
 
 ```html
   <div class="mb-3">
@@ -435,7 +435,7 @@ Now add tag helpers for all the text and email input fields to the `Index.cshtml
   </div>
 ```
 
-Place the markup for each field in sequence. All fields will use the same markup, adjusted to reference the appropriate field. For example, the last name field is bound to `Order.LastName`.
+Do the same for `LastName`, `Email`, and `Address`, adjusting the `asp-for` value to reference the appropriate property.
 
 For the email address field, add a `type="email"` attribute to the `input` element.
 
@@ -483,15 +483,13 @@ The product selection should be presented as a drop-down list rather than a text
 
 Open `Index.cshtml`.
 
-Inside the `<form>` element, add the following markup to render the product selection field:
+Replace the TODO comment inside the product selection `<div>` with the following markup:
 
 ```html
-  <div class="mb-3">
       <label asp-for="Order.Product" class="form-label"></label>
       <select asp-for="Order.Product" class="form-select" asp-items="@(new SelectList(Pluralsight.OrderForm.Models.Order.AvailableProducts.OrderBy(x => x)))">
           <option value="">-- Select a product --</option>
       </select>
-  </div>
 ```
 
 ---
@@ -520,18 +518,18 @@ There are two more fields you need to add to the form: the free text comments an
 
 Open `Index.cshtml`.
 
-Just above the **Submit Order** button, add this markup for the comments and agreement fields:
+Replace the TODO comment inside the comments `<div>` with:
 
 ```html
-  <div class="mb-3">
       <label asp-for="Order.Comments" class="form-label"></label>
       <textarea asp-for="Order.Comments" class="form-control" rows="3"></textarea>
-  </div>
+```
 
-  <div class="mb-3 form-check">
+Then replace the TODO comment inside the agree to terms `<div>` with:
+
+```html
       <input asp-for="Order.AgreeToTerms" class="form-check-input" />
       <label asp-for="Order.AgreeToTerms" class="form-check-label"></label>
-  </div>
 ```
 
 ---
@@ -623,7 +621,7 @@ ASP.NET provides two tag helpers for presenting validation errors, one for prese
 
 ### Task 4.2: Add validation summary and field-level validation messages
 
-Open `Index.cshtml`. First add the overall summary by adding the following tag helper right at the top of the form, above the fields and just inside the `<form>` element:
+Open `Index.cshtml`. Replace the validation summary TODO comment at the top of the form with the following tag helper:
 
 ```html
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -633,7 +631,7 @@ The value `ModelOnly` will prevent the repetition of field level validation mess
 
 Then add field level validation messages to each form field.
 
-You do this by adding an additional `span` element with an `asp-validation-for` attribute. For example, the full markup for the first name field will be:
+You do this by adding a `span` element with an `asp-validation-for` attribute after the input element inside each field's `<div>`. For example, the full markup for the first name field will be:
 
 ```html
 <div class="mb-3">
@@ -709,15 +707,13 @@ The default ASP.NET Razor Pages project includes a **partial view** - a reusable
 
 ### Task 4.3: Enable client-side validation
 
-To add client-side validation, add the following code to the bottom of the `Index.cshtml` file.
-
-The `@section` directive injects content into a named placeholder defined in the layout page:
+Open `Index.cshtml`. At the bottom of the file, you will see a `@section Scripts` block with a TODO comment. Replace the TODO comment with the following partial view reference:
 
 ```html
-@section Scripts {
     <partial name="_ValidationScriptsPartial" />
-}
 ```
+
+The `@section` directive injects content into a named placeholder defined in the layout page. This partial view includes the jQuery unobtrusive validation scripts.
 
 ---
 Check:
