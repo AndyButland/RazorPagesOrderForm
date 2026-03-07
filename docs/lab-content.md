@@ -41,8 +41,6 @@ Explore the files in the `Pluralsight.OrderForm` folder to see what makes up a R
 
 There are other files necessary for bootstrapping the web application and rendering the pages that you can review. None are essential to understand for the purposes of the lab nor will you be modifying them.
 
-There is also a `Pluralsight.OrderForm.Tests` folder that contains some stub unit tests in the `IndexTests.cs` file. You'll be extending these tests to verify that your changes correctly implement the required business logic.
-
 ## Step 2: Define the Order Model
 
 To render and process the order form, you first need a strongly typed representation of the data you'll collect. This is what has been started in the `Order.cs` file. Each piece of data will be defined as a property on this class.
@@ -607,75 +605,13 @@ rules:
 
 When the form is posted, ASP.NET automatically validates the bound model against its data annotation attributes and records the results in `ModelState`. The code checks `ModelState.IsValid`, and if validation fails, calls `Page()` to re-render the current page, preserving the form data and any validation errors.
 
-It's good practice to add automated tests to verify this logic, which you'll do now.
-
-### Task 4.2: Write a test to verify invalid submissions return the form
-
-Complete a unit test verifying that an invalid form submission returns the user to the page to correct their input. A stub test exists in `IndexTests` called `OnPost_InvalidModel_ReturnsPageWithValidationErrors`.
-
-Replace the existing comments in the body of the test with the following code:
-
-```csharp
-  // Arrange
-  var pageModel = new IndexModel();
-  pageModel.ModelState.AddModelError("Order.FirstName", "First Name is required");
-
-  // Act
-  var result = pageModel.OnPost();
-
-  // Assert
-  Assert.IsType<PageResult>(result);
-  Assert.False(pageModel.ModelState.IsValid);
-```
-
-To run the tests you will first need to stop the running web application by pressing `CTRL+C` in your terminal window.
-
-Open a second terminal window and run the following to verify that the test passes.
-
-```
-cd Pluralsight.OrderForm.Tests
-dotnet test
-```
-
-You should see the following result:
-
-```
-Test summary: total: 3, failed: 0, succeeded: 3
-```
-
----
-Check:
-
-```yaml
-rules:
-- id: task_4_2_addmodelerror
-  pattern-regex: AddModelError\(\s*"Order\.FirstName"\s*,\s*"First Name is required"\s*\)
-  message: Semgrep found a match
-  languages: [C#]
-  severity: WARNING
-
-- id: task_4_2_assert_pagetype
-  pattern-regex: Assert\.IsType<PageResult>\(\s*result\s*\)
-  message: Semgrep found a match
-  languages: [C#]
-  severity: WARNING
-
-- id: task_4_2_assert_invalid
-  pattern-regex: Assert\.False\(\s*pageModel\.ModelState\.IsValid\s*\)
-  message: Semgrep found a match
-  languages: [C#]
-  severity: WARNING
-```
-
----
-
 The updates to `Index.cshtml.cs` provide the security you need, but it's not very friendly for the user as they can't currently see which particular piece of information they provided is invalid.
 
 To fix that, you will add tag helpers to the form that surface validation errors to the user.
 
 ASP.NET provides two tag helpers for presenting validation errors, one for presenting an overall summary and one for field-level details.
 
-### Task 4.3: Add validation summary and field-level validation messages
+### Task 4.2: Add validation summary and field-level validation messages
 
 First add the overall summary by adding the following tag helper right at the top of the form, above the fields and just inside the `<form>` element:
 
@@ -704,49 +640,49 @@ Check:
 
 ```yaml
 rules:
-- id: task_4_3_validation_summary
+- id: task_4_2_validation_summary
   pattern-regex: asp-validation-summary\s*=\s*"ModelOnly"
   message: Semgrep found a match
   languages: [generic]
   severity: WARNING
 
-- id: task_4_3_validation_firstname
+- id: task_4_2_validation_firstname
   pattern-regex: asp-validation-for\s*=\s*"Order\.FirstName"
   message: Semgrep found a match
   languages: [generic]
   severity: WARNING
 
-- id: task_4_3_validation_lastname
+- id: task_4_2_validation_lastname
   pattern-regex: asp-validation-for\s*=\s*"Order\.LastName"
   message: Semgrep found a match
   languages: [generic]
   severity: WARNING
 
-- id: task_4_3_validation_email
+- id: task_4_2_validation_email
   pattern-regex: asp-validation-for\s*=\s*"Order\.Email"
   message: Semgrep found a match
   languages: [generic]
   severity: WARNING
 
-- id: task_4_3_validation_product
+- id: task_4_2_validation_product
   pattern-regex: asp-validation-for\s*=\s*"Order\.Product"
   message: Semgrep found a match
   languages: [generic]
   severity: WARNING
 
-- id: task_4_3_validation_address
+- id: task_4_2_validation_address
   pattern-regex: asp-validation-for\s*=\s*"Order\.Address"
   message: Semgrep found a match
   languages: [generic]
   severity: WARNING
 
-- id: task_4_3_validation_comments
+- id: task_4_2_validation_comments
   pattern-regex: asp-validation-for\s*=\s*"Order\.Comments"
   message: Semgrep found a match
   languages: [generic]
   severity: WARNING
 
-- id: task_4_3_validation_agreeterms
+- id: task_4_2_validation_agreeterms
   pattern-regex: asp-validation-for\s*=\s*"Order\.AgreeToTerms"
   message: Semgrep found a match
   languages: [generic]
@@ -761,7 +697,7 @@ As discussed earlier, client-side validation provides a better experience by sur
 
 The default ASP.NET Razor Pages project includes a **partial view** - a reusable fragment of Razor markup - for this: `_ValidationScriptsPartial.cshtml`.
 
-### Task 4.4: Enable client-side validation
+### Task 4.3: Enable client-side validation
 
 To add client-side validation, add the following code to the bottom of the `Index.cshtml` file.
 
@@ -778,13 +714,13 @@ Check:
 
 ```yaml
 rules:
-- id: task_4_4_section_scripts
+- id: task_4_3_section_scripts
   pattern-regex: \@section\s+Scripts
   message: Semgrep found a match
   languages: [generic]
   severity: WARNING
 
-- id: task_4_4_validation_partial
+- id: task_4_3_validation_partial
   pattern-regex: <partial\s+name\s*=\s*"_ValidationScriptsPartial"
   message: Semgrep found a match
   languages: [generic]
@@ -799,7 +735,7 @@ You now have validation in place for required fields, string lengths and agreeme
 
 If one of the products proves particularly popular, the inventory could run out. You'll simulate this by encoding a custom validation rule in the server-side logic.
 
-### Task 4.5: Implement a custom server-side validation rule
+### Task 4.4: Implement a custom server-side validation rule
 
 To do this, open the `Index.cshtml.cs` file again and add the following code just before the existing `if (!ModelState.IsValid)` line.
 
@@ -815,13 +751,13 @@ Check:
 
 ```yaml
 rules:
-- id: task_4_5_mug_check
+- id: task_4_4_mug_check
   pattern-regex: Order\.Product\s*==\s*"Mug"
   message: Semgrep found a match
   languages: [C#]
   severity: WARNING
 
-- id: task_4_5_mug_error
+- id: task_4_4_mug_error
   pattern-regex: AddModelError\(\s*"Order\.Product"\s*,\s*"Sorry, all mugs have been given away\."
   message: Semgrep found a match
   languages: [C#]
@@ -832,69 +768,7 @@ rules:
 
 With this in place, if the "Mug" is selected, an additional model error is added, making the model state invalid. As the error is associated with the `Order.Product` field, it will be displayed next to that field, indicating that the user must choose another item.
 
-As well as testing this manually via `dotnet run`, you can write a unit test to verify the validation rule.
-
-### Task 4.6: Write a test to verify the custom validation rule
-
-Open `IndexTests.cs` and find the `OnPost_ValidModelWithMug_ReturnsPageWithValidationError` test.
-
-Replace the body of the test with the following code:
-
-```csharp
-  // Arrange
-  var pageModel = new IndexModel();
-  pageModel.Order = new Order
-  {
-      FirstName = "John",
-      LastName = "Doe",
-      Email = "john@example.com",
-      Product = "Mug",
-      Address = "123 Main St",
-      AgreeToTerms = true
-  };
-
-  // Act
-  var result = pageModel.OnPost();
-
-  // Assert
-  Assert.IsType<PageResult>(result);
-  Assert.False(pageModel.ModelState.IsValid);
-  Assert.True(pageModel.ModelState.ContainsKey("Order.Product"));
-```
-
-Run `dotnet test` in the second console window to verify the tests pass.
-
----
-Check:
-
-```yaml
-rules:
-- id: task_4_6_product_mug
-  pattern-regex: Product\s*=\s*"Mug"
-  message: Semgrep found a match
-  languages: [C#]
-  severity: WARNING
-
-- id: task_4_6_assert_page
-  pattern-regex: Assert\.IsType<PageResult>\(\s*result\s*\)
-  message: Semgrep found a match
-  languages: [C#]
-  severity: WARNING
-
-- id: task_4_6_assert_invalid
-  pattern-regex: Assert\.False\(\s*pageModel\.ModelState\.IsValid\s*\)
-  message: Semgrep found a match
-  languages: [C#]
-  severity: WARNING
-
-- id: task_4_6_assert_containskey
-  pattern-regex: Assert\.True\(\s*pageModel\.ModelState\.ContainsKey\(\s*"Order\.Product"\s*\)\s*\)
-  message: Semgrep found a match
-  languages: [C#]
-  severity: WARNING
-```
-
----
+Re-run the application with `dotnet run` and verify that selecting "Mug" and submitting the form displays the error next to the product field.
 
 ## Step 5: Provide a Confirmation Page
 
@@ -992,6 +866,165 @@ rules:
 
 Run the application again and verify that submitting a valid order displays the confirmation page.
 
+# Step 6: Summing Up
+
+That completes the code lab. You have built a functional order form using ASP.NET Razor Pages.
+
+You defined a strongly typed model with data annotation attributes to enforce validation rules, used tag helpers to render form controls that are synchronized with the model, and implemented a page handler to process the form submission.
+
+You added both client-side and server-side validation to ensure data integrity, including a custom business rule.
+
+Finally, you applied the post/redirect/get pattern to prevent duplicate submissions and present a clean confirmation page.
+
+These techniques form the foundation for building page-centric form workflows in ASP.NET.
+
+
+-----------------------------------
+
+*** REMOVED CONTENT ***
+
+The following test-related tasks and copy were removed because unit tests don't run well in the lab environment. The test project code remains in the repository.
+
+---
+
+### Removed from Step 1 (after the file exploration list):
+
+There is also a `Pluralsight.OrderForm.Tests` folder that contains some stub unit tests in the `IndexTests.cs` file. You'll be extending these tests to verify that your changes correctly implement the required business logic.
+
+---
+
+### Removed from Step 4 (was between Task 4.1 and the validation summary task):
+
+It's good practice to add automated tests to verify this logic, which you'll do now.
+
+### Task 4.2: Write a test to verify invalid submissions return the form
+
+Complete a unit test verifying that an invalid form submission returns the user to the page to correct their input. A stub test exists in `IndexTests` called `OnPost_InvalidModel_ReturnsPageWithValidationErrors`.
+
+Replace the existing comments in the body of the test with the following code:
+
+```csharp
+  // Arrange
+  var pageModel = new IndexModel();
+  pageModel.ModelState.AddModelError("Order.FirstName", "First Name is required");
+
+  // Act
+  var result = pageModel.OnPost();
+
+  // Assert
+  Assert.IsType<PageResult>(result);
+  Assert.False(pageModel.ModelState.IsValid);
+```
+
+To run the tests you will first need to stop the running web application by pressing `CTRL+C` in your terminal window.
+
+Open a second terminal window and run the following to verify that the test passes.
+
+```
+cd Pluralsight.OrderForm.Tests
+dotnet test
+```
+
+You should see the following result:
+
+```
+Test summary: total: 3, failed: 0, succeeded: 3
+```
+
+---
+Check:
+
+```yaml
+rules:
+- id: task_4_2_addmodelerror
+  pattern-regex: AddModelError\(\s*"Order\.FirstName"\s*,\s*"First Name is required"\s*\)
+  message: Semgrep found a match
+  languages: [C#]
+  severity: WARNING
+
+- id: task_4_2_assert_pagetype
+  pattern-regex: Assert\.IsType<PageResult>\(\s*result\s*\)
+  message: Semgrep found a match
+  languages: [C#]
+  severity: WARNING
+
+- id: task_4_2_assert_invalid
+  pattern-regex: Assert\.False\(\s*pageModel\.ModelState\.IsValid\s*\)
+  message: Semgrep found a match
+  languages: [C#]
+  severity: WARNING
+```
+
+---
+
+### Removed from Step 4 (was after Task 4.5, the Mug rule):
+
+As well as testing this manually via `dotnet run`, you can write a unit test to verify the validation rule.
+
+### Task 4.6: Write a test to verify the custom validation rule
+
+Open `IndexTests.cs` and find the `OnPost_ValidModelWithMug_ReturnsPageWithValidationError` test.
+
+Replace the body of the test with the following code:
+
+```csharp
+  // Arrange
+  var pageModel = new IndexModel();
+  pageModel.Order = new Order
+  {
+      FirstName = "John",
+      LastName = "Doe",
+      Email = "john@example.com",
+      Product = "Mug",
+      Address = "123 Main St",
+      AgreeToTerms = true
+  };
+
+  // Act
+  var result = pageModel.OnPost();
+
+  // Assert
+  Assert.IsType<PageResult>(result);
+  Assert.False(pageModel.ModelState.IsValid);
+  Assert.True(pageModel.ModelState.ContainsKey("Order.Product"));
+```
+
+Run `dotnet test` in the second console window to verify the tests pass.
+
+---
+Check:
+
+```yaml
+rules:
+- id: task_4_6_product_mug
+  pattern-regex: Product\s*=\s*"Mug"
+  message: Semgrep found a match
+  languages: [C#]
+  severity: WARNING
+
+- id: task_4_6_assert_page
+  pattern-regex: Assert\.IsType<PageResult>\(\s*result\s*\)
+  message: Semgrep found a match
+  languages: [C#]
+  severity: WARNING
+
+- id: task_4_6_assert_invalid
+  pattern-regex: Assert\.False\(\s*pageModel\.ModelState\.IsValid\s*\)
+  message: Semgrep found a match
+  languages: [C#]
+  severity: WARNING
+
+- id: task_4_6_assert_containskey
+  pattern-regex: Assert\.True\(\s*pageModel\.ModelState\.ContainsKey\(\s*"Order\.Product"\s*\)\s*\)
+  message: Semgrep found a match
+  languages: [C#]
+  severity: WARNING
+```
+
+---
+
+### Removed from Step 5 (was after Task 5.2):
+
 Finally, complete the test suite by writing a test for the redirection logic.
 
 ### Task 5.3: Write a test to verify successful orders redirect to confirmation
@@ -1040,17 +1073,3 @@ rules:
 ```
 
 ---
-
-# Step 6: Summing Up
-
-That completes the code lab. You have built a functional order form using ASP.NET Razor Pages.
-
-You defined a strongly typed model with data annotation attributes to enforce validation rules, used tag helpers to render form controls that are synchronized with the model, and implemented a page handler to process the form submission.
-
-You added both client-side and server-side validation to ensure data integrity, including a custom business rule.
-
-Finally, you applied the post/redirect/get pattern to prevent duplicate submissions and present a clean confirmation page.
-
-These techniques form the foundation for building page-centric form workflows in ASP.NET.
-
-
