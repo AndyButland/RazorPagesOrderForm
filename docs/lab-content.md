@@ -576,7 +576,7 @@ rules:
   severity: WARNING
 
 - id: task_4_1_modelstate_check
-  pattern-regex: if\s*\(\s*!ModelState\.IsValid\s*\)
+  pattern-regex: if\s*\(\s*(!ModelState\.IsValid|ModelState\.IsValid\s*==\s*false|ModelState\.IsValid\s+is\s+false)\s*\)
   message: Add a check for `ModelState.IsValid` inside the `OnPost` method.
   languages: [C#]
   severity: WARNING
